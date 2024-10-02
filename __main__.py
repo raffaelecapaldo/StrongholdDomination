@@ -6,16 +6,18 @@ import sys
 pygame.init()
 
 orologio = pygame.time.Clock()
-risoluzione = (800,600)
+risoluzione = (1920,1080)
 schermo = pygame.display.set_mode(risoluzione)
 pygame.display.set_caption('Stronghold Domination')
 orologio.tick(60)  
+
+COLORE_PRATO = (141,200,103)
 
 
 running = True
 
 while running:
-    schermo.fill("white")
+    schermo.fill(COLORE_PRATO)
     pygame.display.update()
 
     for event in pygame.event.get():
@@ -23,3 +25,8 @@ while running:
             running = False
             pygame.quit()
             sys.exit()
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                pygame.quit()
+                sys.exit()
