@@ -1,6 +1,9 @@
 import pygame
 import sys
 from classi import classi
+#per i monitor dei portatili che hanno il desktop scalato
+import ctypes
+ctypes.windll.user32.SetProcessDPIAware()
 
 #SETTAGGIO FINESTRA
 
