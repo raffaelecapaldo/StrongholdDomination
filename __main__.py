@@ -10,7 +10,7 @@ ctypes.windll.user32.SetProcessDPIAware()
 pygame.init()
 
 orologio = pygame.time.Clock()
-risoluzione = (1440,860)
+risoluzione = (1920,1080)
 schermo = pygame.display.set_mode(risoluzione)
 pygame.display.set_caption('Stronghold Domination')
 orologio.tick(60)
