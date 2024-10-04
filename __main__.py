@@ -15,6 +15,8 @@ lord = classi.Lord(960,540)
 
 COLORE_PRATO = (141,200,103)
 
+vel_lord_x = 1
+vel_lord_y = 1
 
 running = True
 
@@ -40,20 +42,20 @@ while running:
                 pygame.quit()
                 sys.exit()
             if event.key == pygame.K_LEFT:
-                lord.cambia_vel(-2, 0)
+                lord.cambia_vel(-1*vel_lord_x, 0)
                 print("test")
             if event.key == pygame.K_RIGHT:
-                lord.cambia_vel(2, 0)
+                lord.cambia_vel(vel_lord_x, 0)
             if event.key == pygame.K_UP:
-                lord.cambia_vel(0, -2)
+                lord.cambia_vel(0, -1*vel_lord_y)
             if event.key == pygame.K_DOWN:
-                lord.cambia_vel(0, 2)
+                lord.cambia_vel(0, vel_lord_y)
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
-                lord.cambia_vel(2, 0)
+                lord.cambia_vel(vel_lord_x, 0)
             if event.key == pygame.K_RIGHT:
-                lord.cambia_vel(-2, 0)
+                lord.cambia_vel(-1*vel_lord_x, 0)
             if event.key == pygame.K_UP:
-                lord.cambia_vel(0, 2)
+                lord.cambia_vel(0, vel_lord_y)
             if event.key == pygame.K_DOWN:
-                lord.cambia_vel(0, -2)
+                lord.cambia_vel(0, -1*vel_lord_y)
