@@ -38,8 +38,8 @@ class Lord(pygame.sprite.Sprite):
 
 
     def update(self):
-        larghezza = 1440
-        altezza = 860
+        larghezza = 1920
+        altezza = 1080
         self.pos_x += self.vel_x
         self.pos_y += self.vel_y
         self.rect.x += int(self.vel_x)
