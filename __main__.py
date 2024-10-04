@@ -15,8 +15,8 @@ lord = classi.Lord(960,540)
 
 COLORE_PRATO = (141,200,103)
 
-vel_lord_x = 1
-vel_lord_y = 1
+vel_lord_x = 0.35
+vel_lord_y = 0.35
 
 running = True
 

@@ -20,16 +20,25 @@ class Lord(pygame.sprite.Sprite):
         self.vel_x = 0
         self.vel_y = 0
 
+        #usato float per memorizzare posizione con virgola mobile, in modo da renderlo più lento
+        #e riconvertito in int dopo perché pygame nel rendering con rect richiede numeri interi
+        self.pos_x = float(larghezza)
+        self.pos_y = float(altezza)
+
     def cambia_vel(self, x, y):
-        self.vel_x += x
-        self.vel_y += y
+        self.vel_x += float(x)
+        self.vel_y += float(y)
 
 
     def update(self):
         larghezza = 1920
         altezza = 1080
-        self.rect.x += self.vel_x
-        self.rect.y += self.vel_y
+        self.pos_x += self.vel_x
+        self.pos_y += self.vel_y
+        self.rect.x += int(self.vel_x)
+        self.rect.y += int(self.vel_y)
+        self.rect.x = int(self.pos_x)
+        self.rect.y = int(self.pos_y)
         # Controllo dei limiti dello schermo
         if self.rect.left < 0:
             self.rect.left = 0
