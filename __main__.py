@@ -7,11 +7,12 @@ from classi import classi
 pygame.init()
 
 orologio = pygame.time.Clock()
-risoluzione = (1920,1080)
+risoluzione = (1440,860)
 schermo = pygame.display.set_mode(risoluzione)
 pygame.display.set_caption('Stronghold Domination')
 orologio.tick(60)
 lord = classi.Lord(960,540)
+castello = classi.Edificio(0,0,"Immagini/Castello_1-removebg-preview.png")
 
 COLORE_PRATO = (141,200,103)
 
@@ -26,6 +27,11 @@ while running:
     gruppoLord.add(lord)
     gruppoLord.draw(schermo)
     gruppoLord.update()
+    gruppoCastello = pygame.sprite.Group()
+    gruppoCastello.add(castello)
+    gruppoCastello.draw(schermo)
+    gruppoCastello.update()
+
 
     pygame.display.update()
 

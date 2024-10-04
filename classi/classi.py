@@ -38,8 +38,8 @@ class Lord(pygame.sprite.Sprite):
 
 
     def update(self):
-        larghezza = 1920
-        altezza = 1080
+        larghezza = 1440
+        altezza = 860
         self.pos_x += self.vel_x
         self.pos_y += self.vel_y
         self.rect.x += int(self.vel_x)
@@ -55,6 +55,21 @@ class Lord(pygame.sprite.Sprite):
             self.rect.top = 0
         if self.rect.bottom > altezza:
             self.rect.bottom = altezza
+
+class Edificio(pygame.sprite.Sprite):
+
+
+    def __init__(self, larghezza, altezza, immagine_edificio):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load(immagine_edificio)
+        #self.imageLeft = pygame.transform.scale(self.image, (100,134))
+
+        self.image = self.image.convert_alpha()
+        self.rect =  self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
+
+
+        self.rect.topleft = (larghezza,altezza)
 
 
         
