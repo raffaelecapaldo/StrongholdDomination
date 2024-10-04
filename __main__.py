@@ -43,9 +43,17 @@ while running:
                 sys.exit()
             if event.key == pygame.K_LEFT:
                 lord.cambia_vel(-1*vel_lord_x, 0)
-                print("test")
+                if lord.isRight:
+                    lord.image = lord.imageLeft
+                    lord.isRight = False
+                    lord.isLeft = True
             if event.key == pygame.K_RIGHT:
                 lord.cambia_vel(vel_lord_x, 0)
+                if lord.isLeft:
+                    lord.image = lord.imageRight
+                    lord.isRight = True
+                    lord.isLeft = False
+
             if event.key == pygame.K_UP:
                 lord.cambia_vel(0, -1*vel_lord_y)
             if event.key == pygame.K_DOWN:

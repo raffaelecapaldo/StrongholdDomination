@@ -10,10 +10,17 @@ class Lord(pygame.sprite.Sprite):
     def __init__(self, larghezza, altezza):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(immagineLord)
-        self.image = pygame.transform.scale(self.image, (100,134))
+        self.imageLeft = pygame.transform.scale(self.image, (100,134))
+        self.image = self.imageLeft
+
         self.image = self.image.convert_alpha()
         self.rect =  self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
+        self.imageRight = pygame.transform.flip(self.image, True, False)
+        
+        self.isLeft = True
+        self.isRight = False
+
 
 
         self.rect.topleft = (larghezza,altezza)
