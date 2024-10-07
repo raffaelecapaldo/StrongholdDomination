@@ -1,4 +1,5 @@
 import pygame
+import math
 
 immagineLord = "immagini/Lord-1-removebg-preview.png"
 
@@ -72,5 +73,29 @@ class Edificio(pygame.sprite.Sprite):
         self.rect.topleft = (larghezza,altezza)
 
 
+class Nemico(pygame.sprite.Sprite):
+    def __init__(self, larghezza, altezza, velocita):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("immagini/bandito.png")
+        self.image = pygame.transform.scale(self.image, (134,134))
+
+        self.image = self.image.convert_alpha()
+        self.rect =  self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
+        self.velocita = velocita
+
+
+        self.rect.topleft = (larghezza,altezza)
+
+
+        #distanza = math.sqrt(dx ** 2 + dy ** 2)
+
+    def update(self, personaggio):
+        dx, dy = personaggio.rect.centerx - self.rect.centerx, personaggio.rect.centery - self.rect.centery
+        distanza = math.hypot(dx, dy)
         
+        if distanza > 0:
+            dx, dy = dx / distanza, dy / distanza 
+            self.rect.x += dx * self.velocita
+            self.rect.y += dy * self.velocita
 

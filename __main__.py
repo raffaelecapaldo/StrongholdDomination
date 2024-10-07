@@ -16,11 +16,12 @@ pygame.display.set_caption('Stronghold Domination')
 orologio.tick(60)
 lord = classi.Lord(960,540)
 castello = classi.Edificio(0,0,"Immagini/Castello_1-removebg-preview.png")
+bandito = classi.Nemico(700,700, 1)
 
 COLORE_PRATO = (141,200,103)
 
-vel_lord_x = 0.35
-vel_lord_y = 0.35
+vel_lord_x = 2
+vel_lord_y = 2
 
 running = True
 
@@ -34,6 +35,10 @@ while running:
     gruppoCastello.add(castello)
     gruppoCastello.draw(schermo)
     gruppoCastello.update()
+    gruppoNemici = pygame.sprite.Group()
+    gruppoNemici.add(bandito)
+    gruppoNemici.draw(schermo)
+    gruppoNemici.update(lord)
 
 
     pygame.display.update()
