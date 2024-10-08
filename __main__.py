@@ -17,6 +17,7 @@ orologio.tick(60)
 lord = classi.Lord(960,540)
 castello = classi.Edificio(0,0,"Immagini/Castello_1-removebg-preview.png")
 bandito = classi.Nemico(700,700, 1)
+bandito2 = classi.Nemico(1300,1000, 1)
 
 COLORE_PRATO = (141,200,103)
 
@@ -36,7 +37,7 @@ while running:
     gruppoCastello.draw(schermo)
     gruppoCastello.update()
     gruppoNemici = pygame.sprite.Group()
-    gruppoNemici.add(bandito)
+    gruppoNemici.add(bandito, bandito2)
     gruppoNemici.draw(schermo)
     gruppoNemici.update(lord)
 

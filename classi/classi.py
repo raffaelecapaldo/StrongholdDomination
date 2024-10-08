@@ -1,7 +1,7 @@
 import pygame
 import math
 
-immagineLord = "immagini/Lord-1-removebg-preview.png"
+immagineLord = "immagini/lordnuovo.png"
 
 
 
@@ -11,7 +11,7 @@ class Lord(pygame.sprite.Sprite):
     def __init__(self, larghezza, altezza):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(immagineLord)
-        self.imageLeft = pygame.transform.scale(self.image, (100,134))
+        self.imageLeft = pygame.transform.scale(self.image, (134,134))
         self.image = self.imageLeft
 
         self.image = self.image.convert_alpha()
