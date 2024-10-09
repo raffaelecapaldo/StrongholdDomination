@@ -1,10 +1,11 @@
 import pygame
 import sys
-
+import ctypes
+ctypes.windll.user32.SetProcessDPIAware()
 
 pygame.init()
 # Definisci le dimensioni della finestra
-larghezza_schermo, altezza_schermo = (800, 600)
+larghezza_schermo, altezza_schermo = (1920, 1080)
 
 # Crea una finestra di gioco
 screen = pygame.display.set_mode((larghezza_schermo, altezza_schermo))
