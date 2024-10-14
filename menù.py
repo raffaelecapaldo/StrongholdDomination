@@ -13,7 +13,7 @@ screen = pygame.display.set_mode((larghezza_schermo, altezza_schermo))
 
 # Background del menu
 bg = pygame.image.load("Immagini/sfondo menu.jpg")
-bg =  pygame.transform.scale(bg, (larghezza_schermo,altezza_schermo))
+bg = pygame.transform.scale(bg, (larghezza_schermo,altezza_schermo))
 
 
 
