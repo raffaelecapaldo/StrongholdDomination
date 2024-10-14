@@ -8,6 +8,10 @@ ctypes.windll.user32.SetProcessDPIAware()
 #SETTAGGIO FINESTRA
 
 pygame.init()
+bg = pygame.image.load("Immagini/sfondo menu.jpg")
+bg = pygame.transform.scale(bg, (1920,1080))
+font = pygame.font.Font(None, 36)
+font_titolo = pygame.font.Font(None, 60)
 
 orologio = pygame.time.Clock()
 risoluzione = (1920,1080)
@@ -25,8 +29,47 @@ vel_lord_x = 2
 vel_lord_y = 2
 
 running = True
-
+game_state = "menu"
 while running:
+ if game_state == "menu":
+      for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = event.pos
+                if start_button.collidepoint(mouse_pos):
+                    game_state = "play"
+
+
+
+                if exit_button.collidepoint(mouse_pos):
+                    pygame.quit()
+                    quit()
+            # Creazione della schermata iniziale
+            titolo_gioco = font_titolo.render('StrongHold Domination', True, 'white')
+            text_start = font.render('Inizia', True, "white")
+            text_exit = font.render('Esci', True, "white")
+
+            # Definiamo i nostri bottoni
+            start_button = pygame.Rect(300, 200, 200, 50)
+            exit_button = pygame.Rect(300, 340, 200, 50)
+                    
+            # Riempi la finestra con l'immagine di sfondo
+            schermo.blit(bg, (0,0))
+
+            # Disegna rettangoli sullo schermo
+            pygame.draw.rect(schermo, "blue", start_button, 1, 1)
+            pygame.draw.rect(schermo, "blue", exit_button, 1, 1)
+
+            # Posiziona il testo nel rettangolo
+            schermo.blit(text_start, (310, 210))  
+            schermo.blit(text_exit, (310, 350))
+            schermo.blit(titolo_gioco,(100,100))
+
+            pygame.display.update()
+ elif game_state == "play":
+
     schermo.fill(COLORE_PRATO)
     gruppoLord = pygame.sprite.Group()
     gruppoLord.add(lord)
