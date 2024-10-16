@@ -20,13 +20,16 @@ pygame.display.set_caption('Stronghold Domination')
 orologio.tick(60)
 lord = classi.Lord(960,540)
 castello = classi.Edificio(0,0,"Immagini/Castello_1-removebg-preview.png")
-bandito = classi.Nemico(700,700, 1)
-bandito2 = classi.Nemico(1300,1000, 1)
+
 
 COLORE_PRATO = (141,200,103)
 
 vel_lord_x = 2
 vel_lord_y = 2
+enemy_sprites = pygame.sprite.Group()
+enemy_sprites.add(classi.Nemico(100, 100, 2))  # Usa il percorso dell'immagine del nemico
+enemy_sprites.add(classi.Nemico(200, 200, 2))
+enemy_sprites.add(classi.Nemico(300, 300, 2))
 
 running = True
 game_state = "menu"
@@ -79,11 +82,13 @@ while running:
     gruppoCastello.add(castello)
     gruppoCastello.draw(schermo)
     gruppoCastello.update()
-    gruppoNemici = pygame.sprite.Group()
-    gruppoNemici.add(bandito, bandito2)
-    gruppoNemici.draw(schermo)
-    gruppoNemici.update(lord)
 
+
+        # Muovi e disegna nemici
+    for enemy in enemy_sprites:
+            enemy.update(lord, enemy_sprites)  # Aggiorna posizione nemici seguendo il lord
+
+    enemy_sprites.draw(schermo)  # Disegna i nemici sullo schermo
 
     pygame.display.update()
 
