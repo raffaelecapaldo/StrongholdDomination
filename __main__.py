@@ -49,7 +49,6 @@ while running:
                     game_state = "play"
 
 
-
                 if exit_button.collidepoint(mouse_pos):
                     pygame.quit()
                     quit()
