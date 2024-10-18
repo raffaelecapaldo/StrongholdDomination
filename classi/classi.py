@@ -34,6 +34,16 @@ class Lord(pygame.sprite.Sprite):
         self.pos_y = float(altezza)
 
     def cambia_vel(self, x, y):
+        if self.pos_x < 0:
+            self.pos_x = 0
+        elif self.pos_x >= 1920 - 134:
+            self.pos_x = 1920 - 134
+            print("TEST")
+        
+        if self.pos_y < 0:
+            self.pos_y = 0
+        elif self.pos_y >= 1080 - 134:
+            self.pos_y = 1080 - 134
         self.vel_x += float(x)
         self.vel_y += float(y)
 
