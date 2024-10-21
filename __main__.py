@@ -37,16 +37,33 @@ vel_lord_y = 2
 
 running = True
 game_state = "menu"
+
+
+def mostra_tutorial():
+    schermo.fill("black")
+    font = pygame.font.Font(None, 36)
+    testo = [
+        "            Tutorial:",
+        "Usa le frecce per muovere la il Rè.",
+        "Premi 'Esc' per tornare al menu.",
+        "Premi 'Space' per iniziare a giocare.",
+    ]
+    for i, linea in enumerate(testo):
+        testo_render = font.render(linea, True, "white")
+        schermo.blit(testo_render, (700, 400 + i * 40))
+    
+    
+    pygame.display.flip()
 while running:
- if game_state == "menu":
-      for event in pygame.event.get():
+    if game_state == "menu":
+        for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = event.pos
                 if start_button.collidepoint(mouse_pos):
-                    game_state = "play"
+                    game_state = "tutorial"
 
 
                 if exit_button.collidepoint(mouse_pos):
@@ -74,60 +91,69 @@ while running:
             schermo.blit(titolo_gioco,(400,140))
 
             pygame.display.update()
- elif game_state == "play":
+    elif game_state == "tutorial":
+        mostra_tutorial()
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    game_state == "menu"
+                elif event.key == pygame.K_SPACE:
+                    game_state = "play"
 
-    schermo.fill(COLORE_PRATO)
-    gruppoLord = pygame.sprite.Group()
-    gruppoLord.add(lord)
-    gruppoLord.draw(schermo)
-    gruppoLord.update()
-    gruppoCastello = pygame.sprite.Group()
-    gruppoCastello.add(castello)
-    gruppoCastello.draw(schermo)
-    gruppoCastello.update()
-    gruppoNemici = pygame.sprite.Group()
-    gruppoNemici.add(bandito, bandito2)
-    gruppoNemici.draw(schermo)
-    gruppoNemici.update(lord)
+    elif game_state == "play":
+
+        schermo.fill(COLORE_PRATO)
+        gruppoLord = pygame.sprite.Group()
+        gruppoLord.add(lord)
+        gruppoLord.draw(schermo)
+        gruppoLord.update()
+        gruppoCastello = pygame.sprite.Group()
+        gruppoCastello.add(castello)
+        gruppoCastello.draw(schermo)
+        gruppoCastello.update()
+        gruppoNemici = pygame.sprite.Group()
+        gruppoNemici.add(bandito, bandito2)
+        gruppoNemici.draw(schermo)
+        gruppoNemici.update(lord)
 
 
-    pygame.display.update()
+        pygame.display.update()
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-            pygame.quit()
-            sys.exit()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                pygame.quit()
+                sys.exit()
 
 
 
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
                 
-                game_state = "menu"
-            if event.key == pygame.K_LEFT:
-                lord.cambia_vel(-1*vel_lord_x, 0)
-                if lord.isRight:
-                    lord.image = lord.imageLeft
-                    lord.isRight = False
-                    lord.isLeft = True
-            if event.key == pygame.K_RIGHT:
-                lord.cambia_vel(vel_lord_x, 0)
-                if lord.isLeft:
-                    lord.image = lord.imageRight
-                    lord.isRight = True
-                    lord.isLeft = False
+                    game_state = "menu"
+                if event.key == pygame.K_LEFT:
+                    lord.cambia_vel(-1*vel_lord_x, 0)
+                    if lord.isRight:
+                        lord.image = lord.imageLeft
+                        lord.isRight = False
+                        lord.isLeft = True
+                if event.key == pygame.K_RIGHT:
+                    lord.cambia_vel(vel_lord_x, 0)
+                    if lord.isLeft:
+                        lord.image = lord.imageRight
+                        lord.isRight = True
+                        lord.isLeft = False
 
-            if event.key == pygame.K_UP:
-                lord.cambia_vel(0, -1*vel_lord_y)
-            if event.key == pygame.K_DOWN:
-                lord.cambia_vel(0, vel_lord_y)
-        elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT:
-                lord.cambia_vel(vel_lord_x, 0)
-            if event.key == pygame.K_RIGHT:
-                lord.cambia_vel(-1*vel_lord_x, 0)
-            if event.key == pygame.K_UP:
-                lord.cambia_vel(0, vel_lord_y)
-            if event.key == pygame.K_DOWN:
-                lord.cambia_vel(0, -1*vel_lord_y)
+                if event.key == pygame.K_UP:
+                    lord.cambia_vel(0, -1*vel_lord_y)
+                if event.key == pygame.K_DOWN:
+                    lord.cambia_vel(0, vel_lord_y)
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT:
+                    lord.cambia_vel(vel_lord_x, 0)
+                if event.key == pygame.K_RIGHT:
+                    lord.cambia_vel(-1*vel_lord_x, 0)
+                if event.key == pygame.K_UP:
+                    lord.cambia_vel(0, vel_lord_y)
+                if event.key == pygame.K_DOWN:
+                    lord.cambia_vel(0, -1*vel_lord_y)
