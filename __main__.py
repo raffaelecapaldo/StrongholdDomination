@@ -39,6 +39,8 @@ contatore_spade = font_titolo.render('Spade: ' + str(spade), True, 'white')
 clessidra = pygame.image.load("Immagini/clessidra.png")
 clessidra_rect = clessidra.get_rect()
 clessidra_rect.topleft = (1800, 10)
+clessidra_grigia = clessidra.copy()
+clessidra_grigia.fill((100, 100, 100), special_flags=pygame.BLEND_RGB_MULT)
 
 ACCRESCI_VALUTA  = pygame.USEREVENT + 1
 pygame.time.set_timer(ACCRESCI_VALUTA, 10000)
@@ -112,7 +114,13 @@ while running:
     gruppoNemici.add(bandito, bandito2)
     gruppoNemici.draw(schermo)
     gruppoNemici.update(lord)
-    schermo.blit(clessidra, (1800,10))
+    if slow_speed or oro < 4:
+    # Se slow_speed è attivo, mostra la clessidra grigia
+        schermo.blit(clessidra_grigia, clessidra_rect.topleft)
+    else:
+    # Altrimenti, mostra la clessidra normale
+        schermo.blit(clessidra, clessidra_rect.topleft)
+        schermo.blit(clessidra, (1800,10))
 
 
 
@@ -144,7 +152,6 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = event.pos
                 if clessidra_rect.collidepoint(mouse_pos):
-                    print("AAAA")
                     if oro >= 4 and slow_speed == False:
                         oro-=4
                         slow_speed = True
