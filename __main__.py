@@ -27,13 +27,37 @@ pygame.display.set_caption('Stronghold Domination')
 orologio.tick(60)
 lord = classi.Lord(960,540)
 castello = classi.Edificio(0,0,"Immagini/Castello_1-removebg-preview.png")
-bandito = classi.Nemico(700,700, 1)
-bandito2 = classi.Nemico(1300,1000, 1)
+bandito = classi.Nemico(700,700, 2)
+bandito2 = classi.Nemico(1300,1000, 2)
 
 COLORE_PRATO = (141,200,103)
 
 vel_lord_x = 2
 vel_lord_y = 2
+
+#VALUTE GIOCO
+oro = 5
+spade = 5
+contatore_oro = font_titolo.render('Oro: ' + str(oro), True, 'white')
+contatore_spade = font_titolo.render('Spade: ' + str(spade), True, 'white')
+
+
+#BOTTONI
+clessidra = pygame.image.load("Immagini/clessidra.png")
+clessidra_rect = clessidra.get_rect()
+clessidra_rect.topleft = (1800, 10)
+clessidra_grigia = clessidra.copy()
+clessidra_grigia.fill((100, 100, 100), special_flags=pygame.BLEND_RGB_MULT)
+
+ACCRESCI_VALUTA  = pygame.USEREVENT + 1
+pygame.time.set_timer(ACCRESCI_VALUTA, 10000)
+RIPRISTINA_VELOCITA = pygame.USEREVENT + 2
+
+
+slow_speed = False
+
+
+
 
 running = True
 game_state = "menu"
@@ -78,6 +102,8 @@ while running:
  elif game_state == "play":
 
     schermo.fill(COLORE_PRATO)
+ 
+
     gruppoLord = pygame.sprite.Group()
     gruppoLord.add(lord)
     gruppoLord.draw(schermo)
@@ -86,10 +112,24 @@ while running:
     gruppoCastello.add(castello)
     gruppoCastello.draw(schermo)
     gruppoCastello.update()
+    contatore_oro = font_titolo.render('Oro: ' + str(oro), True, 'white')
+    contatore_spade = font_titolo.render('Spade: ' + str(spade), True, 'white')
+    schermo.blit(contatore_oro,(10,30))
+    schermo.blit(contatore_spade,(10,70))
+
     gruppoNemici = pygame.sprite.Group()
     gruppoNemici.add(bandito, bandito2)
     gruppoNemici.draw(schermo)
     gruppoNemici.update(lord)
+    if slow_speed or oro < 4:
+    # Se slow_speed è attivo, mostra la clessidra grigia
+        schermo.blit(clessidra_grigia, clessidra_rect.topleft)
+    else:
+    # Altrimenti, mostra la clessidra normale
+        schermo.blit(clessidra, clessidra_rect.topleft)
+        schermo.blit(clessidra, (1800,10))
+
+
 
 
     pygame.display.update()
@@ -99,6 +139,36 @@ while running:
             running = False
             pygame.quit()
             sys.exit()
+
+        if event.type == ACCRESCI_VALUTA:
+            oro+=1
+            spade+=1
+            contatore_oro = font_titolo.render('Oro: ' + str(oro), True, 'white')
+            contatore_spade = font_titolo.render('Spade: ' + str(spade), True, 'white')
+            schermo.blit(contatore_oro,(10,30))
+            schermo.blit(contatore_spade,(10,70))
+        
+        if event.type == RIPRISTINA_VELOCITA:
+    # Ripristina la velocità dei nemici al valore originale
+            for nemici in gruppoNemici:
+             nemici.velocita = 2
+    # Ferma il timer (impostando a 0)
+            pygame.time.set_timer(RIPRISTINA_VELOCITA, 0)
+            slow_speed = False
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = event.pos
+                if clessidra_rect.collidepoint(mouse_pos):
+                    if oro >= 4 and slow_speed == False:
+                        oro-=4
+                        slow_speed = True
+                        for nemici in gruppoNemici:
+                            nemici.velocita -=1
+                        pygame.time.set_timer(RIPRISTINA_VELOCITA, 5000)
+
+        
+
+
 
 
 
