@@ -19,6 +19,8 @@ bg = pygame.image.load("Immagini/sfondo menu.jpg")
 bg = pygame.transform.scale(bg, (1920,1080))
 font = pygame.font.Font(None, 100)
 font_titolo = pygame.font.Font(None, 150)
+font_contatori = pygame.font.Font(None, 70)
+
 
 orologio = pygame.time.Clock()
 risoluzione = (1920,1080)
@@ -38,8 +40,8 @@ vel_lord_y = 2
 #VALUTE GIOCO
 oro = 5
 spade = 5
-contatore_oro = font_titolo.render('Oro: ' + str(oro), True, 'white')
-contatore_spade = font_titolo.render('Spade: ' + str(spade), True, 'white')
+contatore_oro = font_contatori.render('Oro: ' + str(oro), True, 'white')
+contatore_spade = font_contatori.render('Spade: ' + str(spade), True, 'white')
 
 
 #BOTTONI
@@ -112,8 +114,8 @@ while running:
     gruppoCastello.add(castello)
     gruppoCastello.draw(schermo)
     gruppoCastello.update()
-    contatore_oro = font_titolo.render('Oro: ' + str(oro), True, 'white')
-    contatore_spade = font_titolo.render('Spade: ' + str(spade), True, 'white')
+    contatore_oro = font_contatori.render('Oro: ' + str(oro), True, 'white')
+    contatore_spade = font_contatori.render('Spade: ' + str(spade), True, 'white')
     schermo.blit(contatore_oro,(10,30))
     schermo.blit(contatore_spade,(10,70))
 
