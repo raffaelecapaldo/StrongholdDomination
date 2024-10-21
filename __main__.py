@@ -8,10 +8,17 @@ ctypes.windll.user32.SetProcessDPIAware()
 #SETTAGGIO FINESTRA
 
 pygame.init()
+# Definisci le dimensioni della finestra
+larghezza_schermo, altezza_schermo = (1920, 1080)
+
+# Crea una finestra di gioco
+screen = pygame.display.set_mode((larghezza_schermo, altezza_schermo))
+
+# Sfondo del gioco
 bg = pygame.image.load("Immagini/sfondo menu.jpg")
 bg = pygame.transform.scale(bg, (1920,1080))
-font = pygame.font.Font(None, 36)
-font_titolo = pygame.font.Font(None, 60)
+font = pygame.font.Font(None, 100)
+font_titolo = pygame.font.Font(None, 150)
 
 orologio = pygame.time.Clock()
 risoluzione = (1920,1080)
@@ -72,13 +79,13 @@ while running:
                     quit()
             # Creazione della schermata iniziale
             titolo_gioco = font_titolo.render('StrongHold Domination', True, 'white')
-            text_start = font.render('Inizia', True, "white")
-            text_exit = font.render('Esci', True, "white")
+            text_start = font.render('START', True, "white")
+            text_exit = font.render('EXIT', True, "white")
 
             # Definiamo i nostri bottoni
-            start_button = pygame.Rect(300, 200, 200, 50)
-            exit_button = pygame.Rect(300, 340, 200, 50)
-                    
+            start_button = pygame.Rect(810, 400, 250, 80)
+            exit_button = pygame.Rect(830, 640, 190, 80)
+
             # Riempi la finestra con l'immagine di sfondo
             schermo.blit(bg, (0,0))
 
@@ -87,9 +94,9 @@ while running:
             pygame.draw.rect(schermo, "blue", exit_button, 1, 1)
 
             # Posiziona il testo nel rettangolo
-            schermo.blit(text_start, (310, 210))  
-            schermo.blit(text_exit, (310, 350))
-            schermo.blit(titolo_gioco,(100,100))
+            schermo.blit(text_start, (820, 410))  
+            schermo.blit(text_exit, (840, 650))
+            schermo.blit(titolo_gioco,(400,140))
 
             pygame.display.update()
  elif game_state == "play":
@@ -167,8 +174,8 @@ while running:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                pygame.quit()
-                sys.exit()
+                
+                game_state = "menu"
             if event.key == pygame.K_LEFT:
                 lord.cambia_vel(-1*vel_lord_x, 0)
                 if lord.isRight:
