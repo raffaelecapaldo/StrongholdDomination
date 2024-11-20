@@ -40,8 +40,8 @@ vel_lord_y = 2
 #VALUTE GIOCO
 oro = 5
 spade = 5
-contatore_oro = font_contatori.render('Oro: ' + str(oro), True, 'white')
-contatore_spade = font_contatori.render('Spade: ' + str(spade), True, 'white')
+contatore_oro = font_contatori.render('Oro: ' + str(oro), True, 'yellow')
+contatore_spade = font_contatori.render('Spade: ' + str(spade), True, (4, 161, 232))
 
 
 #BOTTONI
@@ -138,8 +138,8 @@ while running:
     gruppoCastello.add(castello)
     gruppoCastello.draw(schermo)
     gruppoCastello.update()
-    contatore_oro = font_contatori.render('Oro: ' + str(oro), True, 'white')
-    contatore_spade = font_contatori.render('Spade: ' + str(spade), True, 'white')
+    contatore_oro = font_contatori.render('Oro: ' + str(oro), True, 'yellow')
+    contatore_spade = font_contatori.render('Spade: ' + str(spade), True, (4, 161, 232))
     schermo.blit(contatore_oro,(10,30))
     schermo.blit(contatore_spade,(10,70))
 
@@ -169,8 +169,8 @@ while running:
         if event.type == ACCRESCI_VALUTA:
             oro+=1
             spade+=1
-            contatore_oro = font_titolo.render('Oro: ' + str(oro), True, 'white')
-            contatore_spade = font_titolo.render('Spade: ' + str(spade), True, 'white')
+            contatore_oro = font_titolo.render('Oro: ' + str(oro), True, 'yellow')
+            contatore_spade = font_titolo.render('Spade: ' + str(spade), True, (4, 161, 232))
             schermo.blit(contatore_oro,(10,30))
             schermo.blit(contatore_spade,(10,70))
         
