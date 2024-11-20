@@ -58,7 +58,22 @@ RIPRISTINA_VELOCITA = pygame.USEREVENT + 2
 
 slow_speed = False
 
-
+def mostra_tutorial():
+    schermo.fill("black")
+    font = pygame.font.Font(None, 36)
+    testo = [
+        "            Tutorial:",
+        "Usa le frecce per muovere la il Rè.",
+        "Premi 'Esc' per tornare al menu.",
+        "Premi 'Space' per iniziare a giocare.",
+        "Clicca la clessidra per rallentare i nemici per 4 monete"
+    ]
+    for i, linea in enumerate(testo):
+        testo_render = font.render(linea, True, "white")
+        schermo.blit(testo_render, (700, 400 + i * 40))
+    
+    
+    pygame.display.flip()
 
 
 running = True
@@ -72,7 +87,7 @@ while running:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = event.pos
                 if start_button.collidepoint(mouse_pos):
-                    game_state = "play"
+                    game_state = "tutorial"
 
 
 
@@ -101,6 +116,15 @@ while running:
             schermo.blit(titolo_gioco,(400,140))
 
             pygame.display.update()
+            
+ elif game_state == "tutorial":
+        mostra_tutorial()
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    game_state == "menu"
+                elif event.key == pygame.K_SPACE:
+                    game_state = "play"
  elif game_state == "play":
 
     schermo.fill(COLORE_PRATO)
